@@ -1,0 +1,34 @@
+clc, clear, close
+
+n = 10;
+degrees = [0,0,0,180,120,0,0,180,0,0;
+    0,0,0,0,180,0,60,0,120,0;
+    60,120,0,60,180,180,60,120,0,120;
+    90,60,0,60,180,120,120,0,180,0;
+    120,0,180,0,0,60,60,60,120,0;
+    0,180,,0,60,180,0,60,0,0,0;
+    0,0,120,0,180,180,0,60,60,60;
+    0,180,0,60,180,120,0,120,180,0;
+    60,180,60,0,0,180,0,60,0,0;
+    0,0,0,0,60,180,180,0,0,0];
+% degrees(10,:) = zeros(1,10);
+
+degrees = degrees';
+cut_list = generate_squares_with_cuts_degrees(n,degrees);
+
+% cut_list = shorten_edges(cut_list, 1/100);
+
+plot_cut_list(cut_list)
+
+% horizontal_and_vertical = true;
+% displacement = 0.5;
+% [output_image, result] = compute_skin(cut_list, displacement, horizontal_and_vertical);
+
+% plot_solution_on_skin(result)
+
+% figure
+% imshow(output_image);
+
+% plot_von_mises_stress(result);
+
+% plot_nodes_mesh_highest_von_mises_stress(result, 50);
