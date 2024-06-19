@@ -15,11 +15,12 @@ function VMstress = minimize_von_mises_stress_orientation(n, orientation, p)
 % OUTPUT:
 %       VMstress: the Lp-norm of the von Mises stress of the model
 
-cut_list = generate_squares_with_cuts(n, orientation);
+orientation_new = zeros(1,n*n);
+orientation_new(2:9) = orientation(1:8);
+orientation_new(11:90) = orientation(9:88);
+orientation_new(92:99) = orientation(89:96);
 
-% cut_list = shorten_edges(cut_list, 1/n/5);
-
-cut_list = eliminate_cuts_around_corner(cut_list, 0.1 + 1/n/10);
+cut_list = generate_squares_with_cuts(n, orientation_new, 0.2);
 
 cs = 0.1;
 displ = 0.5;

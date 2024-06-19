@@ -1,8 +1,8 @@
 clc, clear, close
 
 minimize_cut_list = false;
-minimize_orientation = false;
-minimize_length = true;
+minimize_orientation = true;
+minimize_length = false;
 
 n = 10;
 p = 2;
@@ -48,10 +48,12 @@ elseif minimize_orientation
         46,48,50,51,53,55,57,59,62,64,66,68,70,71,73,75,77,79,82,84,86,88,90,91,93,95,97,99]) = 2;
     orientation_swap([1,10,91,100]) = 0;
 
-    options = optimoptions('ga','Display','diagnose','PopulationSize',nvars,'MaxStallGenerations',20,'MaxGenerations',100,...
-        'InitialPopulationMatrix',orientation_swap);
+    % options = optimoptions('ga','PopulationSize',nvars,'ConstraintTolerance','InitialPopulationMatrix',orientation_swap,'MaxStallGenerations',1);
+    % options = optimoptions('ga','Display','diagnose','PopulationSize',nvars,'MaxStallGenerations',20,'MaxGenerations',100,...
+    %     'InitialPopulationMatrix',orientation_swap);
     [orientation_min,VMstress_min,exitflag,output,population,scores] = ga(f_orientation,nvars,[],[],[],[],lb,ub,[],1:nvars,options);
     % orientation_min = ga(f_orientation,nvars,[],[],[],[],lb,ub,[],1:nvars,options);
+
 
     cut_list_min = generate_squares_with_cuts(n, orientation_min);
     % cut_list_min = shorten_edges(cut_list_min, 1/n/5);
