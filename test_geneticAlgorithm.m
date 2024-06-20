@@ -21,7 +21,7 @@ orientation_swap([1,10,91,100]) = [];
 
 disp("genetic algorithm starts now");
 
-options = optimoptions('ga','PopulationSize',nvars,'InitialPopulationMatrix',orientation_swap,'Display','diagnose');
+options = optimoptions('ga','PopulationSize',nvars,'InitialPopulationMatrix',orientation_swap,'Display','diagnose','MaxStallGenerations',1,'OutputFcn',@outputFcn_global);
 % options = optimoptions('ga','Display','diagnose','PopulationSize',nvars,'MaxStallGenerations',20,'MaxGenerations',100,...
 %     'InitialPopulationMatrix',orientation_swap);
 [orientation_min,VMstress_min,exitflag,output,population,scores] = ga(f_orientation,nvars,[],[],[],[],lb,ub,[],1:nvars,options);
