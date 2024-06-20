@@ -9,7 +9,8 @@ function generate_dossier_10x10_pdf(names)
 
 if nargin < 1
     names = ["lines", "grid", "s", "hexagon", "octagon", "hilbert_curve",...
-        "sierpinski_curve", "peano_curve", "gosper_curve", "swap", "z_curve", "e_curve"];
+        "sierpinski_curve", "peano_curve", "gosper_curve", "swap",...
+        "swap_diagonal", "z_curve", "e_curve"];
 end
 
 close

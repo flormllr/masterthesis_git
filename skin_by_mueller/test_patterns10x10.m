@@ -1,10 +1,10 @@
 clc, clear, close
 
-cut_list = get_cut_list_patterns_10x10("swap");
+cut_list = get_cut_list_patterns_10x10_cutsEverywhere("swap_diagonal");
 
 % cut_list = change_length_of_cuts(cut_list, 1:size(cut_list,1), 0.2);
 
-% plot_cut_list(cut_list)
+plot_cut_list(cut_list)
 % hold on
 % plot([0,0,1,1,0],[0,1,1,0,0],'k-')
 % hold off
@@ -13,12 +13,12 @@ cut_list = get_cut_list_patterns_10x10("swap");
 % axis equal
 % grid on
 
-horizontal_and_vertical = true;
-displacement = 0.5;
-innerFace = [1/4,1/4; 3/4,1/4; 3/4,3/4; 1/4,3/4];
+% horizontal_and_vertical = true;
+% displacement = 0.5;
+% innerFace = [1/4,1/4; 3/4,1/4; 3/4,3/4; 1/4,3/4];
 % innerFace = [1/10,1/10; 9/10,1/10; 9/10,9/10; 1/10,9/10];
 % [~, result] = compute_skin(cut_list, displacement, horizontal_and_vertical);
-[~, result] = compute_skin(cut_list, displacement, horizontal_and_vertical, innerFace);
+% [~, result] = compute_skin(cut_list, displacement, horizontal_and_vertical, innerFace);
 
 % xBox = [1/4 3/4];
 % yBox = [1/4 3/4];

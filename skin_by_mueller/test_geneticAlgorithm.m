@@ -1,5 +1,7 @@
 clc, clear, close
 
+disp("it worked, test_geneticAlgorithm is starting to run now");
+
 n = 10;
 p = 2;
 
@@ -17,7 +19,9 @@ orientation_swap([2,4,6,8,10,11,13,15,17,19,22,24,26,28,30,31,33,35,37,39,42,44,
 orientation_swap([1,10,91,100]) = [];
 % orientation_swap = [1,2,2,1];
 
-options = optimoptions('ga','PopulationSize',nvars,'InitialPopulationMatrix',orientation_swap);
+disp("genetic algorithm starts now");
+
+options = optimoptions('ga','PopulationSize',nvars,'InitialPopulationMatrix',orientation_swap,'Display','diagnose');
 % options = optimoptions('ga','Display','diagnose','PopulationSize',nvars,'MaxStallGenerations',20,'MaxGenerations',100,...
 %     'InitialPopulationMatrix',orientation_swap);
 [orientation_min,VMstress_min,exitflag,output,population,scores] = ga(f_orientation,nvars,[],[],[],[],lb,ub,[],1:nvars,options);

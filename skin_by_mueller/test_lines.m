@@ -17,7 +17,10 @@ displacement = 0.5;
 % figure
 % imshow(output_image);
 
-plot_von_mises_stress(result);
+fig = figure;
+plot_von_mises_stress(result,true);
+saveas(fig,'output/VMstress_lines_TEST.pdf');
+close(fig)
 % plot_von_mises_stress_jpg(result, 'von Mises stress: lines', 'lines')
 % plot_von_mises_stress_jpg(result, 'von Mises stress (log scale): lines', 'lines_log', true)
 

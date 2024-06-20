@@ -17,3 +17,6 @@ for i1 = 1:4
         end
     end
 end
+
+[L2min, L2argmin] = min(L2);
+orientation_min = orientation(L2argmin,:);
