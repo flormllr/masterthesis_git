@@ -10,14 +10,14 @@ function generate_dossier_10x10_pdf(names)
 if nargin < 1
     names = ["lines", "grid", "s", "hexagon", "octagon", "hilbert_curve",...
         "sierpinski_curve", "peano_curve", "gosper_curve", "swap",...
-        "swap_diagonal", "z_curve", "e_curve"];
+        "swap_diagonal", "swap_diagonal_2","z_curve", "e_curve"];
 end
 
 close
 
 for i = 1:length(names)
     pattern = names(i);
-    cut_list = get_cut_list_patterns_10x10(pattern);
+    cut_list = get_cut_list_patterns_10x10_cutsEverywhere(pattern);
     horizontal_and_vertical = true;
     displacement = 0.5;
     [~, result] = compute_skin(cut_list, displacement, horizontal_and_vertical);
@@ -72,7 +72,7 @@ for i = 1:length(names)
     A4_height_cm = 29.7;
     set(gcf, 'Position', [100, 100, A4_width_cm*100/2.54, A4_height_cm*100/2.54]);
 
-    exportgraphics(fig, "dossier10x10.pdf", 'ContentType', 'image', 'BackgroundColor', 'white', 'Append', true);
+    exportgraphics(fig, "dossier10x10_cutsEverywhere.pdf", 'ContentType', 'image', 'BackgroundColor', 'white', 'Append', true);
 
     close(fig);
 end

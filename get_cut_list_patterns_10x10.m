@@ -4,7 +4,7 @@ function cut_list = get_cut_list_patterns_10x10(name)
 %       specified in name. Possible patterns are:
 %       "lines", "grid", "s", "hexagon", "octagon", "hilbert_curve",
 %       "sierpinski_curve", "peano_curve", "gosper_curve", "swap",
-%       "swap_diagonal", "z_curve", "e_curve".
+%       "swap_diagonal", "swap_diagonal_2", "z_curve", "e_curve".
 % INPUT:
 %       name: string, specifying the name of the pattern
 % OUTPUT:
@@ -122,6 +122,12 @@ elseif name == "swap_diagonal"
     orientation = 4*ones(100,1);
     orientation([2,4,6,8,10,11,13,15,17,19,22,24,26,28,30,31,33,35,37,39,42,44,...
         46,48,50,51,53,55,57,59,62,64,66,68,70,71,73,75,77,79,82,84,86,88,90,91,93,95,97,99]) = 3;
+    orientation([1,10,91,100]) = 0;
+    cut_list = generate_squares_with_cuts(n,orientation,shorten_by);  
+elseif name == "swap_diagonal_2"
+    orientation = 3*ones(100,1);
+    orientation([2,4,6,8,10,11,13,15,17,19,22,24,26,28,30,31,33,35,37,39,42,44,...
+        46,48,50,51,53,55,57,59,62,64,66,68,70,71,73,75,77,79,82,84,86,88,90,91,93,95,97,99]) = 4;
     orientation([1,10,91,100]) = 0;
     cut_list = generate_squares_with_cuts(n,orientation,shorten_by);  
 elseif name == "z_curve"
