@@ -25,9 +25,9 @@ for p_counter = 1:4
     nvars = n_middle^2;
     lb = ones(nvars,1);
     ub = 4*ones(nvars,1);
-    swap_middle = [1,2,1; 2,1,2; 1,2,1];
-
-    options = optimoptions('ga','Display','diagnose','PopulationSize',nvars,'InitialPopulationMatrix',swap_middle);
+    % swap_middle = [1,2,1; 2,1,2; 1,2,1];
+    % ,'InitialPopulationMatrix',swap_middle
+    options = optimoptions('ga','Display','diagnose','PopulationSize',nvars);
     % options = optimoptions('ga','Display','diagnose','PopulationSize',nvars,'MaxStallGenerations',20,'MaxGenerations',100,...
     %     'InitialPopulationMatrix',swap_middle);
     [orientation_min_middle,VMstress_min] = ga(f_orientation,nvars,[],[],[],[],lb,ub,[],1:nvars,options);
