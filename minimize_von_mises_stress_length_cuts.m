@@ -10,6 +10,10 @@ function VMstress = minimize_von_mises_stress_length_cuts(length, cut_list, p, x
 %       length: percentage values (+/-) that we want to lengthen/shorten
 %           the cuts in cut_list by
 %       p: integer, tells us which Lp-norm to use
+%       xRange: two-element row array, tells us the x-coordinates of the
+%           box where we want to compute the von Mises stress
+%       yRange: two-element row array, tells us the y-coordinates of the
+%           box where we want to compute the von Mises stress
 % OUTPUT:
 %       VMstress: the Lp-norm of the von Mises stress of the model
 
@@ -19,7 +23,12 @@ horizontal_and_vertical = true;
 
 cut_list = change_length_of_cuts(cut_list, 1:size(cut_list,1), length);
 
-model = create_lin_elast_model(cut_list, displ, horizontal_and_vertical, cs);
+if nargin < 4
+    model = create_lin_elast_model(cut_list, displ, horizontal_and_vertical, cs);
+else
+    innerFace = [xRange(1),yRange(1); xRange(2),yRange(1); xRange(2),yRange(2); xRange(1),yRange(2)];
+    model = create_lin_elast_model(cut_list, displ, horizontal_and_vertical, cs, innerFace);
+end
 
 % generates the mesh, Hmax is used to control the mesh size
 generateMesh(model,'Hmax',0.007);

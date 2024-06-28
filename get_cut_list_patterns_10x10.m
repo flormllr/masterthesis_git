@@ -3,8 +3,10 @@ function cut_list = get_cut_list_patterns_10x10(name)
 %       This function generates and returns the cut_list for the pattern
 %       specified in name. Possible patterns are:
 %       "lines", "grid", "s", "hexagon", "octagon", "hilbert_curve",
-%       "sierpinski_curve", "peano_curve", "gosper_curve", "swap",
-%       "swap_diagonal", "swap_diagonal_2", "z_curve", "e_curve".
+%       "sierpinski_curve", "peano_curve", "gosper_curve",
+%       "gosper_curve_2", "swap", "swap_diagonal", "zigzag", "z_curve",
+%       "e_curve".
+%       Attention: "gosper_curve_2" is only here for it to be looked at!
 % INPUT:
 %       name: string, specifying the name of the pattern
 % OUTPUT:
@@ -99,7 +101,7 @@ elseif name == "peano_curve"
     orientation = orientation(:);
     orientation([1,10,91,100]) = 0;
     cut_list = generate_squares_with_cuts(n,orientation,shorten_by);
-elseif name == "gosper_curve"
+elseif name == "gosper_curve_2"
     degrees = [0,0,0,180,120,0,0,180,0,0;
         0,0,0,0,180,0,60,0,120,0;
         60,120,0,60,180,180,60,120,0,120;
@@ -111,6 +113,16 @@ elseif name == "gosper_curve"
         60,180,60,0,0,180,0,60,0,0;
         0,0,0,0,60,180,180,0,0,0]';
     cut_list = generate_squares_with_cuts_degrees(n,degrees,shorten_by);
+elseif name == "gosper_curve"
+    Z = pattern_gosper_curve(4);
+    px = real(Z) - min(real(Z));
+    py = imag(Z) - min(imag(Z));
+    px = 2.9*px/max(px) - 1;
+    py = 3.1*py/max(py) - 0.98;
+    cut_list = generate_cuts_from_points(px, py);
+    cut_list = cut_list((abs(cut_list(:,1)) <= 0.5) & (abs(cut_list(:,2)) <= 0.5)...
+        & (abs(cut_list(:,3)) <= 0.5) & (abs(cut_list(:,4)) <= 0.5), :) + 0.5;
+    cut_list = cut_list + 0.005;
 elseif name == "swap"
     orientation = ones(100,1);
     orientation([2,4,6,8,10,11,13,15,17,19,22,24,26,28,30,31,33,35,37,39,42,44,...
@@ -124,10 +136,10 @@ elseif name == "swap_diagonal"
         46,48,50,51,53,55,57,59,62,64,66,68,70,71,73,75,77,79,82,84,86,88,90,91,93,95,97,99]) = 3;
     orientation([1,10,91,100]) = 0;
     cut_list = generate_squares_with_cuts(n,orientation,shorten_by);  
-elseif name == "swap_diagonal_2"
+elseif name == "zigzag"
     orientation = 3*ones(100,1);
-    orientation([2,4,6,8,10,11,13,15,17,19,22,24,26,28,30,31,33,35,37,39,42,44,...
-        46,48,50,51,53,55,57,59,62,64,66,68,70,71,73,75,77,79,82,84,86,88,90,91,93,95,97,99]) = 4;
+    orientation([2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,...
+        46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,78,80,82,84,86,88,90,92,94,96,98]) = 4;
     orientation([1,10,91,100]) = 0;
     cut_list = generate_squares_with_cuts(n,orientation,shorten_by);  
 elseif name == "z_curve"

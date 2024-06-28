@@ -13,11 +13,11 @@ end
 
 if log_scale
     logVonMisesStress = log10(result.VonMisesStress/1000000);
-    pdeviz(result.Mesh, 'NodalData', logVonMisesStress, 'DeformationData', result.Displacement, 'DeformationScaleFactor', 1, 'MeshVisible','off');
+    pdeviz(result.Mesh, 'NodalData', logVonMisesStress, 'DeformationData', result.Displacement, 'DeformationScaleFactor', 1, 'MeshVisible','off','ColorLimits',[-4 1]);
     % pdeplot(result.Mesh, XYData = result.VonMisesStress/1000000, Deformation = result.Displacement, DeformationScaleFactor = 1, ColorMap = 'jet')
     % set(gca,'ColorScale','log')
 else
-    pdeviz(result.Mesh, 'NodalData', result.VonMisesStress/1000000, 'DeformationData', result.Displacement, 'DeformationScaleFactor', 1, 'MeshVisible','off');
+    pdeviz(result.Mesh, 'NodalData', result.VonMisesStress/1000000, 'DeformationData', result.Displacement, 'DeformationScaleFactor', 1, 'MeshVisible','off','ColorLimits',[0 6]);
     % pdeplot(result.Mesh, XYData = result.VonMisesStress/1000000, Deformation = result.Displacement, DeformationScaleFactor = 1, ColorMap = 'jet')
 end
 

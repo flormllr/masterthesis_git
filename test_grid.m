@@ -9,14 +9,14 @@ cut_list = shorten_edges(cut_list, 0.02);
 
 cut_list = repeat_pattern(cut_list, 9, 9, 0.05, 0.05, 0.0, 0.0, 0, 0, true);
 
-cut_list = eliminate_cuts_around_corner(cut_list, 0.15);
+% cut_list = eliminate_cuts_around_corner(cut_list, 0.15);
 
 plot_cut_list(cut_list);
 % plot_cut_list_jpg(cut_list, "grid", "grid");
 
-horizontal_and_vertical = true;
-displacement = 0.5;
-[output_image, result] = compute_skin(cut_list, displacement, horizontal_and_vertical);
+% horizontal_and_vertical = true;
+% displacement = 0.5;
+% [output_image, result] = compute_skin(cut_list, displacement, horizontal_and_vertical);
 
 % figure
 % imshow(output_image)

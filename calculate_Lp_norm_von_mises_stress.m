@@ -22,6 +22,13 @@ if nargin < 4
 else
     idxs_elements = findElements(result.Mesh, "box", xRange, yRange);
     amountOfElements = size(idxs_elements,2);
+    % Ef = findElements(result.Mesh,"box",xRange,yRange);
+    % figure
+    % pdemesh(result.Mesh)
+    % hold on
+    % pdemesh(result.Mesh.Nodes,result.Mesh.Elements(:,Ef),EdgeColor="green")
+    % plot([xRange(1),xRange(1),xRange(2),xRange(2),xRange(1)],[yRange(1),yRange(2),yRange(2),yRange(1),xRange(1)],'k-')
+    % hold off
 end
 
 % amountOfElements = size(result.Mesh.Elements,2);
@@ -38,11 +45,18 @@ for i = 1:amountOfElements
 
     % von Mises stress in MPa
     VMstress_triangle = result.VonMisesStress(triangle_indices) / 1000000;
-    triangle_area = 1/2 * abs(a(1)*(b(2)-c(2)) + b(1)*(c(2)-a(2)) + c(1)*(a(2)-b(2)));
-    % integral_result = triangle_area * 1/6 * (sum(VMstress_triangle(1:3).^p) + 4*sum(VMstress_triangle(4:6).^p));
-    integral_result = triangle_area * 1/3 * sum(VMstress_triangle(4:6).^p);
-    % VMstress_norm = VMstress_norm + nthroot(integral_result,p);
-    VMstress_norm = VMstress_norm + integral_result;
+    if ~isnumeric(p)
+        triangle_max = max(VMstress_triangle);
+        if VMstress_norm < triangle_max
+            VMstress_norm = triangle_max;
+        end
+    else
+        triangle_area = 1/2 * abs(a(1)*(b(2)-c(2)) + b(1)*(c(2)-a(2)) + c(1)*(a(2)-b(2)));
+        % integral_result = triangle_area * 1/6 * (sum(VMstress_triangle(1:3).^p) + 4*sum(VMstress_triangle(4:6).^p));
+        integral_result = triangle_area * 1/3 * sum(VMstress_triangle(4:6).^p);
+        % VMstress_norm = VMstress_norm + nthroot(integral_result,p);
+        VMstress_norm = VMstress_norm + integral_result;
+    end
 
     % 2nd variant, takes a lot longer
     % VM_fct = @(x,y) (interpolateVonMisesStress(result,x,y)/1000000) .^p;
@@ -59,7 +73,9 @@ for i = 1:amountOfElements
     % VM_fct_triangle = @(x,y) (inpolygon(x,y,[a(1); b(1); c(1)],[a(2); b(2); c(2)]) * VM_fct(x,y))^p;
     % VMstress_norm = VMstress_norm + nthroote(integral2(VM_fct_triangle, min(triangleX), max(triangleX), min(triangleY), max(triangleY), 'Method', 'iterated'), p);
 end
-VMstress_norm = nthroot(VMstress_norm,p);
+if isnumeric(p)
+    VMstress_norm = nthroot(VMstress_norm,p);
+end
 
 end
 
