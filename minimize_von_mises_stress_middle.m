@@ -39,6 +39,8 @@ if mod(n_bigSquares, 2) ~= 1
     return
 end
 
+orientation_middle = reshape(orientation_middle, [n_middle n_middle])';
+
 orientation = repmat(orientation_middle, n_bigSquares)';
 cut_list = generate_squares_with_cuts(n, orientation, 0.2);
 
