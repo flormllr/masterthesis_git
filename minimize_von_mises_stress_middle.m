@@ -14,7 +14,7 @@ function VMstress = minimize_von_mises_stress_middle(n, n_middle, orientation_mi
 %           in total there are thus n*n squares
 %       n_middle: number of little squares in the middle, where we set the
 %           orientation
-%       orientation_middle: matrix of size n_middle*n_middle. each entry in
+%       orientation_middle: vector of size n_middle*n_middle. each entry in
 %           the middle sqares is either 0 (no cut), 1 (horizontal cut),
 %           2 (vertical cut), 3 (diagonal cut, bottom left to top right),
 %           4 (diagonal cut, bottom right to top left). tells us how the
@@ -41,7 +41,7 @@ end
 
 orientation_middle = reshape(orientation_middle, [n_middle n_middle])';
 
-orientation = repmat(orientation_middle, n_bigSquares)';
+orientation = repmat(orientation_middle, n_bigSquares);
 cut_list = generate_squares_with_cuts(n, orientation, 0.2);
 
 if nargin < 5
