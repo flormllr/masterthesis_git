@@ -45,6 +45,7 @@ for i = 1:amountOfElements
 
     % von Mises stress in MPa
     VMstress_triangle = result.VonMisesStress(triangle_indices) / 1000000;
+    % VMstress_triangle = result.VonMisesStress(triangle_indices);
     if ~isnumeric(p)
         triangle_max = max(VMstress_triangle);
         if VMstress_norm < triangle_max

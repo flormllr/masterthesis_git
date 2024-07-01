@@ -8,7 +8,7 @@ function cut_list = generate_squares_with_cuts_degrees(n, vec_degree, shorten_cu
 %       n: number of little square the domain is divided into per row, >0,
 %           in total there are thus n*n squares
 %       vec_degree: vector of size n*n. each entry is a number from 0 to
-%           179 and tells us by how many degrees we have to rotate the
+%           180 and tells us by how many degrees we have to rotate the
 %           horizontal cut.
 %       shorten_cut: value in percentage that we shorten the length of
 %           each cut by, 0 < shorten_cut < 1

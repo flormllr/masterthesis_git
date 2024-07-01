@@ -6,16 +6,16 @@ cut_list = pattern_hexagon(b);
 
 cut_list = repeat_pattern(cut_list, 4, 13, 0.02, 0.04, b, -(sqrt(3)/2)*b, 1.5*b, 0, true);
 
-cut_list = shorten_edges(cut_list, 0.01);
+% cut_list = shorten_edges(cut_list, 0.01);
 
-cut_list = eliminate_cuts_around_corner(cut_list, 0.15);
+% cut_list = eliminate_cuts_around_corner(cut_list, 0.15);
 
 plot_cut_list(cut_list);
 % plot_cut_list_jpg(cut_list, "hexagon shape", "hexagon");
 
-horizontal_and_vertical = true;
-displacement = 0.5;
-[output_image, result] = compute_skin(cut_list, displacement, horizontal_and_vertical);
+% horizontal_and_vertical = true;
+% displacement = 0.5;
+% [output_image, result] = compute_skin(cut_list, displacement, horizontal_and_vertical);
 
 % figure
 % imshow(output_image)

@@ -42,7 +42,8 @@ clc, clear, close
 names = ["lines", "grid", "s", "hexagon", "octagon", "hilbert_curve",...
     "sierpinski_curve", "peano_curve", "gosper_curve",...
     "swap", "swap_diagonal", "zigzag", "z_curve", "e_curve"];
-normes = zeros(length(names),7);
+compliance = zeros(length(names),1);
+% normes = zeros(length(names),7);
 % normesRange = zeros(length(names),7);
 for i = 1:length(names)
     pattern = names(i)
@@ -50,19 +51,23 @@ for i = 1:length(names)
     horizontal_and_vertical = false;
     displacement = 0.5;
     % innerFace = [1/10,1/10; 9/10,1/10; 9/10,9/10; 1/10,9/10];
-    % innerFace = [1/4,1/4; 3/4,1/4; 3/4,3/4; 1/4,3/4];
-    [~, result] = compute_skin(cut_list, displacement, horizontal_and_vertical);
-    % [~, result] = compute_skin(cut_list, displacement, horizontal_and_vertical, innerFace);
+    innerFace = [1/4,1/4; 3/4,1/4; 3/4,3/4; 1/4,3/4];
+    % [~, result] = compute_skin(cut_list, displacement, horizontal_and_vertical);
+    [~, result] = compute_skin(cut_list, displacement, horizontal_and_vertical, innerFace);
 
-    L1 = calculate_Lp_norm_von_mises_stress(result,1);
-    L2 = calculate_Lp_norm_von_mises_stress(result,2);
-    L3 = calculate_Lp_norm_von_mises_stress(result,3);
-    L4 = calculate_Lp_norm_von_mises_stress(result,4);
-    L5 = calculate_Lp_norm_von_mises_stress(result,5);
-    L6 = calculate_Lp_norm_von_mises_stress(result,6);
-    Linfty = max(result.VonMisesStress/1000000);
-    % xRange = [min(innerFace(:,1)),max(innerFace(:,1))];
-    % yRange = [min(innerFace(:,2)),max(innerFace(:,2))];
+    xRange = [min(innerFace(:,1)),max(innerFace(:,1))];
+    yRange = [min(innerFace(:,2)),max(innerFace(:,2))];
+
+    % compliance(i) = calculate_compliance(result);
+    compliance(i) = calculate_compliance(result, xRange, yRange);
+
+    % L1 = calculate_Lp_norm_von_mises_stress(result,1);
+    % L2 = calculate_Lp_norm_von_mises_stress(result,2);
+    % L3 = calculate_Lp_norm_von_mises_stress(result,3);
+    % L4 = calculate_Lp_norm_von_mises_stress(result,4);
+    % L5 = calculate_Lp_norm_von_mises_stress(result,5);
+    % L6 = calculate_Lp_norm_von_mises_stress(result,6);
+    % Linfty = max(result.VonMisesStress/1000000);
     % L1range = calculate_Lp_norm_von_mises_stress(result,1,xRange,yRange);
     % L2range = calculate_Lp_norm_von_mises_stress(result,2,xRange,yRange);
     % L3range = calculate_Lp_norm_von_mises_stress(result,3,xRange,yRange);
@@ -70,6 +75,6 @@ for i = 1:length(names)
     % L5range = calculate_Lp_norm_von_mises_stress(result,5,xRange,yRange);
     % L6range = calculate_Lp_norm_von_mises_stress(result,6,xRange,yRange);
     % Linftyrange = calculate_Lp_norm_von_mises_stress(result,"infty",xRange,yRange);
-    normes(i,:) = [L1,L2,L3,L4,L5,L6,Linfty];
+    % normes(i,:) = [L1,L2,L3,L4,L5,L6,Linfty];
     % normesRange(i,:) = [L1range,L2range,L3range,L4range,L5range,L6range,Linftyrange];
 end

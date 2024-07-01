@@ -33,6 +33,7 @@ end
 % also assign the mass density
 % structuralProperties(model,'YoungsModulus',500000,'PoissonsRatio',0.47);
 structuralProperties(model,'YoungsModulus',500e3,'PoissonsRatio',0.47,'MassDensity',1);
+% structuralProperties(model,'YoungsModulus',5000000,'PoissonsRatio',0.47,'MassDensity',1);
 
 % now we need to specify the boundary conditions for the outer edges
 tol = 1e-8;

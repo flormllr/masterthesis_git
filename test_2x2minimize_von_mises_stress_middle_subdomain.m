@@ -40,7 +40,7 @@ for p_counter = 1:4
             for i3 = 1:4
                 for i4 = 1:4
                     orientation_middle(counter,:) = [i1, i2, i3, i4];
-                    VMstress(counter) = minimize_von_mises_stress_middle(n, n_middle, [i1, i2; i3, i4], p, subdomain);
+                    VMstress(counter) = minimize_von_mises_stress_middle(n, n_middle, [i1, i2, i3, i4], p, subdomain);
                     counter = counter + 1;
                 end
             end
@@ -48,9 +48,10 @@ for p_counter = 1:4
     end
     [VMstress_min, argmin] = min(VMstress);
     orientation_min_middle = orientation_middle(argmin, :);
-    orientation_min_middle = [orientation_min_middle(1), orientation_min_middle(2); orientation_min_middle(3), orientation_min_middle(4)];
 
-    orientation_min = repmat(orientation_min_middle, n/n_middle)';
+    orientation_min_middle = reshape(orientation_min_middle, [n_middle n_middle])';
+
+    orientation_min = repmat(orientation_min_middle, n/n_middle);
     cut_list_min = generate_squares_with_cuts(n, orientation_min, 0.2);
 
     % plot_cut_list(cut_list_min)

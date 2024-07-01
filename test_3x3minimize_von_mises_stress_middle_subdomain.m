@@ -35,7 +35,7 @@ for p_counter = 1:4
 
     orientation_min_middle = reshape(orientation_min_middle, [n_middle n_middle])';
 
-    orientation_min = repmat(orientation_min_middle, n/n_middle)';
+    orientation_min = repmat(orientation_min_middle, n/n_middle);
     cut_list_min = generate_squares_with_cuts(n, orientation_min, 0.2);
 
     % plot_cut_list(cut_list_min)
